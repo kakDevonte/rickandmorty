@@ -1,0 +1,9 @@
+.root {
+    padding: 10px;
+    text-align: center;
+}
+
+.characters {
+    display: flex;
+    flex-wrap: wrap;
+}

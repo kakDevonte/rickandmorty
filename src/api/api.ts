@@ -20,4 +20,7 @@ export const mortyAPI = {
   getCharacters(params: string[]) {
     return instance.get(`character/${JSON.stringify(params)}`);
   },
+  getLocationById(id: number) {
+    return instance.get(`location/${id}`);
+  },
 };
