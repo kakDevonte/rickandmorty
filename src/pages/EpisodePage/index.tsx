@@ -28,7 +28,6 @@ export const EpisodePage: React.FC = () => {
     dispatch(getCharacters(listCharacterIds));
   }, [currEpisode]);
 
-  console.log(characters);
   return (
     <div className={styles.root}>
       <h1>{currEpisode.name}</h1>

@@ -8,6 +8,9 @@ export const mortyAPI = {
   getEpisodes(page: number) {
     return instance.get(`episode?page=${page}`);
   },
+  getEpisodesByArray(params: string[]) {
+    return instance.get(`episode/${JSON.stringify(params)}`);
+  },
   getEpisodeById(id: number) {
     return instance.get(`episode/${id}`);
   },

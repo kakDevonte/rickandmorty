@@ -3,7 +3,7 @@ import { EpisodesType, EpisodeType } from './types';
 import { mortyAPI } from '../../api/api';
 
 export const getEpisodes = createAsyncThunk<EpisodesType, number>(
-  'auth/getEpisodes',
+  'episodes/getEpisodes',
   async (page) => {
     const { data } = await mortyAPI.getEpisodes(page);
     return data;
@@ -11,9 +11,17 @@ export const getEpisodes = createAsyncThunk<EpisodesType, number>(
 );
 
 export const getEpisodeById = createAsyncThunk<EpisodeType, number>(
-  'auth/getEpisodeById',
+  'episodes/getEpisodeById',
   async (id) => {
     const { data } = await mortyAPI.getEpisodeById(id);
+    return data;
+  }
+);
+
+export const getEpisodesByArray = createAsyncThunk<EpisodeType[], string[]>(
+  'episodes/getEpisodesByArray',
+  async (params) => {
+    const { data } = await mortyAPI.getEpisodesByArray(params);
     return data;
   }
 );

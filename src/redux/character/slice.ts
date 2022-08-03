@@ -8,7 +8,7 @@ const initialState: CharacterState = {
 };
 
 const characterSlice = createSlice({
-  name: 'episodes',
+  name: 'character',
   initialState,
   reducers: {},
   extraReducers: (builder) => {

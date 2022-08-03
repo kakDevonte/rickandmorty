@@ -1,6 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { EpisodeState, SeasonType } from './types';
-import { getEpisodeById, getEpisodes } from './asyncActions';
+import { EpisodeState, EpisodesType, EpisodeType, SeasonType } from './types';
+import { getEpisodeById, getEpisodes, getEpisodesByArray } from './asyncActions';
+
+
+const getSeasons = (array: EpisodeType[]): SeasonType[] => {
+
+  const regex = /(?<=S).*?(?=E)/;
+
+  const firstSeason = String(regex.exec(array[0].episode));
+  const seasons: SeasonType[] = [];
+  let season: SeasonType = {
+    number: firstSeason,
+    episodes: [],
+  };
+  array.forEach((item) => {
+    if (String(regex.exec(item.episode)) === season.number) {
+      season.episodes.push(item);
+    } else {
+      seasons.push(season);
+      season = {
+        number: String(regex.exec(item.episode)),
+        episodes: [item],
+      };
+    }
+  });
+  seasons.push(season);
+
+  return seasons;
+}
 
 const initialState: EpisodeState = {
   info: { page: 1, next: null, prev: null },
@@ -22,31 +49,14 @@ const episodesSlice = createSlice({
     builder.addCase(getEpisodes.fulfilled, (state, action) => {
       state.info = action.payload.info;
 
-      const regex = /(?<=S).*?(?=E)/;
-
-      const firstSeason = String(regex.exec(action.payload.results[0].episode));
-      const seasons: SeasonType[] = [];
-      let season: SeasonType = {
-        number: firstSeason,
-        episodes: [],
-      };
-      action.payload.results.forEach((item) => {
-        if (String(regex.exec(item.episode)) === season.number) {
-          season.episodes.push(item);
-        } else {
-          seasons.push(season);
-          season = {
-            number: String(regex.exec(item.episode)),
-            episodes: [item],
-          };
-        }
-      });
-      seasons.push(season);
-      state.results = seasons;
+      state.results = getSeasons(action.payload.results);
     });
     builder.addCase(getEpisodeById.fulfilled, (state, action) => {
       state.currEpisode = action.payload;
       console.log(action.payload);
+    });
+    builder.addCase(getEpisodesByArray.fulfilled, (state, action) => {
+      state.results = getSeasons(action.payload);
     });
   },
 });

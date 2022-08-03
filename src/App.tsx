@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { EpisodesPage } from './pages/EpisodesPage';
 import { EpisodePage } from './pages/EpisodePage';
+import { CharacterPage } from './pages/CharacterPage';
 import './App.css';
 
 export const App: React.FC = () => {
@@ -12,6 +13,7 @@ export const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<EpisodesPage />} />
         <Route path="/episode/:id" element={<EpisodePage />} />
+        <Route path="/character/:id" element={<CharacterPage />} />
         <Route path="*" element={<h2>Page Not Found</h2>} />
       </Routes>
     </div>
