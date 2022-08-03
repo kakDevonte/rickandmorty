@@ -5,6 +5,13 @@
     /*justify-content: center;*/
 }
 
+.search {
+    margin: 15px;
+    display: flex;
+    justify-content: center;
+
+}
+
 .seasonList {
     width: 90%;
     list-style-type: none;

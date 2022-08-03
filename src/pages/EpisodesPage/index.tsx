@@ -16,7 +16,9 @@ export const EpisodesPage: React.FC = () => {
 
   return (
     <div>
-      <Search />
+      <div className={styles.search}>
+        <Search />
+      </div>
       {results &&
         results.map((season) => (
           <div className={styles.root} key={season.number}>
