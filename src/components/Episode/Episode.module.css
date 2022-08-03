@@ -1,0 +1,28 @@
+.root {
+    font-size: 1em;
+    font-weight: bold;
+    background-color: rgb(60, 62, 68);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr;
+    padding: 15px;
+    margin: 10px;
+    text-decoration: none;
+}
+
+.root:hover {
+    background-color: rgb(158, 158, 158);
+    cursor: pointer;
+}
+
+.episode {
+    justify-self: start;
+}
+
+.name {
+    justify-self: start;
+}
+
+.date {
+    justify-self: end;
+}

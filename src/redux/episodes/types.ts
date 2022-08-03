@@ -1,21 +1,29 @@
 type InfoType = {
-    page: number;
-    next: string | null;
-    prev: string | null;
-}
+  page: number;
+  next: string | null;
+  prev: string | null;
+};
 
-type ResultType = {
-    id: number;
-    name: string;
-    air_date: string;
-    episode: string;
-}
+export type SeasonType = {
+  number: string;
+  episodes: EpisodeType[];
+};
+
+export type EpisodeType = {
+  id: number;
+  name: string;
+  air_date: string;
+  episode: string;
+  characters: string[];
+};
 
 export type EpisodesType = {
-    info: InfoType;
-    results: ResultType[];
-}
+  info: InfoType;
+  results: EpisodeType[];
+};
 
 export type EpisodeState = {
-    data: EpisodesType;
-}
+  info: InfoType;
+  results: SeasonType[];
+  currEpisode: EpisodeType;
+};

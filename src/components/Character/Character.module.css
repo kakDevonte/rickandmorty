@@ -1,0 +1,45 @@
+.root {
+    overflow: hidden;
+    background: rgb(60, 62, 68);
+    border-radius: 8px;
+    margin: 15px;
+
+    display: grid;
+    grid-gap: 10px;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+
+    grid-template-areas:
+            "image"
+            "name";
+}
+
+.image {
+    grid-area: image;
+    justify-self: center;
+}
+
+.image img {
+    margin: 0;
+}
+
+.name {
+    grid-area: name;
+    justify-self: center;
+}
+
+.name a {
+    text-decoration: none;
+}
+
+.name h3:hover {
+    color: rgb(255, 152, 0);
+}
+
+.episodes {
+    grid-area: episodes;
+}
+
+.locations {
+    grid-area: locations;
+}
