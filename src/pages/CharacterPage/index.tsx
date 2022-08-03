@@ -33,6 +33,12 @@ export const CharacterPage: React.FC = () => {
 
     }, [currCharacter]);
 
+    const getLocationIdInUrl = (url: string): number => {
+        const splitUrl = url.split('/');
+        const locationIdInUrl = splitUrl[splitUrl.length - 1];
+        return Number(locationIdInUrl);
+    };
+
     if(!currCharacter) return <></>
 
     return (
@@ -60,8 +66,7 @@ export const CharacterPage: React.FC = () => {
                 </div>}
             </div>
             <div className={styles.locations}>
-                <NavLink to={`/location/${currCharacter.id}`}><h2>Locations: {currCharacter.location.name}</h2></NavLink>
-
+                <NavLink to={`/location/${getLocationIdInUrl(currCharacter.location.url)}`}><h2>Locations: {currCharacter.location.name}</h2></NavLink>
             </div>
         </div>
     );
