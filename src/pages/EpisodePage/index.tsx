@@ -33,8 +33,8 @@ export const EpisodePage: React.FC = () => {
     <div className={styles.root}>
       <h1>{currEpisode.name}</h1>
       <h2>{currEpisode.air_date}</h2>
-      <div>
-        <h2>List of characters</h2>
+      <h2>List of characters</h2>
+      <div className={styles.characters}>
         {characters &&
           characters.map((item) => <Character key={item.id} {...item} />)}
       </div>

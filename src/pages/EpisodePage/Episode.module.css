@@ -1,3 +1,8 @@
 .root {
     padding: 10px;
 }
+
+.characters {
+    display: flex;
+    flex-wrap: wrap;
+}
