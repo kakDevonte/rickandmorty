@@ -5,23 +5,43 @@ import { getEpisodes } from '../../redux/episodes/asyncActions';
 import { Episode } from '../../components/Episode';
 
 export const EpisodesPage: React.FC = () => {
-  const { results } = useAppSelector((state) => state.episodes.data);
+  const { results, info } = useAppSelector((state) => state.episodes);
+  const [page, setPage] = React.useState(1);
   const dispatch = useAppDispatch();
 
-  const regex = /(?<=S).*?(?=E)/;
-  const regex2 = /(?<=E).*/;
-  //const episode = regex2.exec();
-
   React.useEffect(() => {
-    dispatch(getEpisodes(1));
-  }, []);
+    dispatch(getEpisodes(page));
+  }, [page]);
 
   return (
-    <div className={styles.root}>
-      <ul>
-        {results &&
-          results.map((episode) => <Episode key={episode.id} {...episode} />)}
-      </ul>
+    <div>
+      {results &&
+        results.map((season) => (
+          <div className={styles.root} key={season.number}>
+            <h2>Season {season.number}</h2>
+            <ul className={styles.seasonList}>
+              {season.episodes.map((episode) => (
+                <Episode key={episode.id} {...episode} />
+              ))}
+            </ul>
+          </div>
+        ))}
+      <div className={styles.pagination}>
+        <button
+          className={styles.button}
+          disabled={!info.prev}
+          onClick={() => setPage(page - 1)}
+        >
+          Назад
+        </button>
+        <button
+          className={styles.button}
+          disabled={!info.next}
+          onClick={() => setPage(page + 1)}
+        >
+          Вперед
+        </button>
+      </div>
     </div>
   );
 };
