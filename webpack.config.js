@@ -22,8 +22,8 @@ const config = {
   },
 
   output: {
-    path: paths.dist,
-    filename: '[name].bundle.js',
+    filename: 'bundle.js',
+    publicPath: '/',
   },
 
   resolve: {
@@ -34,6 +34,16 @@ const config = {
 
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+          },
+        },
+      },
       {
         test: /\.tsx?$/,
         loader: 'ts-loader',
@@ -58,6 +68,11 @@ const config = {
         exclude: /\.module\.css$/,
       },
     ],
+  },
+
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
   },
 
   plugins: [

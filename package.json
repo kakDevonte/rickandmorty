@@ -17,7 +17,7 @@
     "webpack-dev-server": "^4.9.3"
   },
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server --mode development --open --hot --history-api-fallback"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",

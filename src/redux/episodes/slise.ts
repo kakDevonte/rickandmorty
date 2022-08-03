@@ -1,10 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { EpisodeState, SeasonType } from './types';
-import { getEpisodes } from './asyncActions';
+import { getEpisodeById, getEpisodes } from './asyncActions';
 
 const initialState: EpisodeState = {
   info: { page: 1, next: null, prev: null },
   results: [],
+  currEpisode: {
+    id: 1,
+    name: '',
+    air_date: '',
+    episode: '',
+    characters: [],
+  },
 };
 
 const episodesSlice = createSlice({
@@ -36,6 +43,10 @@ const episodesSlice = createSlice({
       });
       seasons.push(season);
       state.results = seasons;
+    });
+    builder.addCase(getEpisodeById.fulfilled, (state, action) => {
+      state.currEpisode = action.payload;
+      console.log(action.payload);
     });
   },
 });
