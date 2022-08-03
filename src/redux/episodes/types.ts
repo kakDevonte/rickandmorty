@@ -1,5 +1,5 @@
 type InfoType = {
-  page: number;
+  pages: number;
   next: string | null;
   prev: string | null;
 };

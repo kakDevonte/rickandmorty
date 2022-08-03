@@ -30,7 +30,7 @@ const getSeasons = (array: EpisodeType[]): SeasonType[] => {
 }
 
 const initialState: EpisodeState = {
-  info: { page: 1, next: null, prev: null },
+  info: { pages: 1, next: null, prev: null },
   results: [],
   currEpisode: {
     id: 1,

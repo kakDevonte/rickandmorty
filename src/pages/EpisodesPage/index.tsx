@@ -3,6 +3,7 @@ import styles from './EpisodesPage.module.css';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { getEpisodes } from '../../redux/episodes/asyncActions';
 import { Episode } from '../../components/Episode';
+import { Search } from '../../components/Search';
 
 export const EpisodesPage: React.FC = () => {
   const { results, info } = useAppSelector((state) => state.episodes);
@@ -15,6 +16,7 @@ export const EpisodesPage: React.FC = () => {
 
   return (
     <div>
+      <Search />
       {results &&
         results.map((season) => (
           <div className={styles.root} key={season.number}>
@@ -26,22 +28,22 @@ export const EpisodesPage: React.FC = () => {
             </ul>
           </div>
         ))}
-      <div className={styles.pagination}>
+      {info.pages > 1 && <div className={styles.pagination}>
         <button
-          className={styles.button}
-          disabled={!info.prev}
-          onClick={() => setPage(page - 1)}
+            className={styles.button}
+            disabled={!info.prev}
+            onClick={() => setPage(page - 1)}
         >
           Назад
         </button>
         <button
-          className={styles.button}
-          disabled={!info.next}
-          onClick={() => setPage(page + 1)}
+            className={styles.button}
+            disabled={!info.next}
+            onClick={() => setPage(page + 1)}
         >
           Вперед
         </button>
-      </div>
+      </div>}
     </div>
   );
 };
