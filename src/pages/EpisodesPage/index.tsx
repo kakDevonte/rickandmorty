@@ -2,10 +2,12 @@ import React from 'react';
 import styles from './EpisodesPage.module.css';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { getEpisodes, searchEpisodes } from '../../redux/episodes/asyncActions';
-import { Episode } from '../../components/Episode';
-import { Search } from '../../components/Search';
-import { SortPopup } from '../../components/SortPopup';
-import { NotFoundBlock } from '../../components/NotFoundBlock';
+import {
+  Episode,
+  Search,
+  SortPopup,
+  NotFoundBlock
+} from '../../components/';
 
 export const EpisodesPage: React.FC = () => {
   const { results, info, searchValue } = useAppSelector(

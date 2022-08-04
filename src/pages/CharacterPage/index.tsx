@@ -1,20 +1,18 @@
 import React from 'react';
 import { NavLink, useParams } from 'react-router-dom';
-import { Episode } from '../../components/Episode';
+import { Episode, NotFoundBlock } from '../../components';
 import { getCharacterById } from '../../redux/character/asyncActions';
 import { getEpisodesByArray } from '../../redux/episodes/asyncActions';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { NotFoundBlock } from '../../components/NotFoundBlock';
-import styles from './CharacterPage.module.css';
 import { setSort } from '../../redux/episodes/slise';
 import { SortPropertyEnum } from '../../redux/episodes/types';
+import styles from './CharacterPage.module.css';
 
 export const CharacterPage: React.FC = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const { currCharacter } = useAppSelector((state) => state.character);
   const { results } = useAppSelector((state) => state.episodes);
-
   const [isVisibleEpisodes, setIsVisibleEpisodes] = React.useState(true);
 
   React.useEffect(() => {
@@ -41,6 +39,7 @@ export const CharacterPage: React.FC = () => {
   const getLocationIdInUrl = (url: string): number => {
     const splitUrl = url.split('/');
     const locationIdInUrl = splitUrl[splitUrl.length - 1];
+
     return Number(locationIdInUrl);
   };
 
