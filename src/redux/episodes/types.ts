@@ -1,3 +1,4 @@
+
 type InfoType = {
   pages: number;
   next: string | null;
