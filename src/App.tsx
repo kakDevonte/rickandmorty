@@ -1,9 +1,12 @@
 import React from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
-import { EpisodesPage } from './pages/EpisodesPage';
-import { EpisodePage } from './pages/EpisodePage';
-import { CharacterPage } from './pages/CharacterPage';
-import { LocationPage } from './pages/LocationPage';
+import { NotFoundBlock } from './components/NotFoundBlock';
+import {
+  EpisodesPage,
+  EpisodePage,
+  CharacterPage,
+  LocationPage,
+} from './pages';
 import './App.css';
 
 export const App: React.FC = () => {
@@ -19,7 +22,7 @@ export const App: React.FC = () => {
         <Route path="/episode/:id" element={<EpisodePage />} />
         <Route path="/character/:id" element={<CharacterPage />} />
         <Route path="/location/:id" element={<LocationPage />} />
-        <Route path="*" element={<h2>Page Not Found</h2>} />
+        <Route path="*" element={<NotFoundBlock />} />
       </Routes>
     </div>
   );
