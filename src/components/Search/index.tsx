@@ -13,9 +13,7 @@ export const Search: React.FC = () => {
     };
 
     const onClickSearchBtn = () => {
-        if(searchValue) {
-            dispatch(searchEpisodes({ page: 1, value: searchValue }));
-        }
+        dispatch(searchEpisodes({ page: 1, value: searchValue }));
     };
 
     return(
