@@ -25,3 +25,11 @@ export const getEpisodesByArray = createAsyncThunk<EpisodeType[], string[]>(
     return data;
   }
 );
+
+export const searchEpisodes = createAsyncThunk<EpisodesType, { page: number, value: string }>(
+  'episodes/searchEpisodes',
+  async (params) => {
+    const { data } = await mortyAPI.searchEpisodes(params.page, params.value);
+    return data;
+  }
+);

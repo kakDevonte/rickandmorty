@@ -1,17 +1,22 @@
 import React from 'react';
 import styles from './EpisodesPage.module.css';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { getEpisodes } from '../../redux/episodes/asyncActions';
+import { getEpisodes, searchEpisodes } from '../../redux/episodes/asyncActions';
 import { Episode } from '../../components/Episode';
 import { Search } from '../../components/Search';
 
 export const EpisodesPage: React.FC = () => {
-  const { results, info } = useAppSelector((state) => state.episodes);
+  const { results, info, searchValue } = useAppSelector((state) => state.episodes);
   const [page, setPage] = React.useState(1);
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    dispatch(getEpisodes(page));
+    if(searchValue) {
+      dispatch(searchEpisodes({ page, value: searchValue }));
+    }
+    else {
+      dispatch(getEpisodes(page));
+    }
   }, [page]);
 
   return (

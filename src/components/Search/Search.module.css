@@ -5,9 +5,12 @@
     border-radius: 5px;
 }
 
-.input input:focus {
-    border-color: #ff0000;
+.input:focus {
+    border-color: #bdbdbd;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
 }
+
 .button {
     border-radius: 5px;
     margin: 5px;
