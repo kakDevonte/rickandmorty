@@ -18,7 +18,6 @@
 }
 
 .image {
-    border: 1px solid saddlebrown;
     overflow: hidden;
     border-radius: 8px;
     grid-area: image;
@@ -29,8 +28,16 @@
 }
 
 .name {
-    border: 1px solid saddlebrown;
     grid-area: name;
+    text-align: center;
+}
+
+.name a {
+    text-decoration: none;
+}
+
+.name a p:hover {
+    color: rgb(255, 152, 0);
 }
 
 .episodes {
@@ -48,7 +55,7 @@
     grid-area: locations;
 }
 
-.locations a{
+.locations a {
     text-decoration: none;
 }
 
@@ -60,4 +67,3 @@
     width: 90%;
     list-style-type: none;
 }
-
