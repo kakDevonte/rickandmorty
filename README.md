@@ -1,7 +1,5 @@
 # Rick and Morty
 
-## Available Scripts
-
 для установки всех пакетов введите команду.
 
 ### `npm i`
