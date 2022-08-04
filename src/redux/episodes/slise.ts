@@ -13,10 +13,6 @@ import {
   searchEpisodes,
 } from './asyncActions';
 
-/**
- * Функция для группировки эпизодов по сезонам.
- * @param array массив эпизодов.
- */
 const getSeasons = (array: EpisodeType[]): SeasonType[] => {
   const regex = /(?<=S).*?(?=E)/;
   const firstNumberSeason: string = String(regex.exec(array[0].episode));
@@ -42,14 +38,9 @@ const getSeasons = (array: EpisodeType[]): SeasonType[] => {
   return seasons;
 };
 
-/**
- * Сортировка списка в указанном порядке с указанием параметра, по которому происходит сортировка.
- * @param array входной массив для сортировки.
- * @param type порядок сортировки.
- * @param func колбек функция, возвращающая параметр, по которому происходит сортировка.
- */
 const sortBy = (array: SeasonType[], type: 'asc' | 'desc', func: (ep: EpisodeType) => string): SeasonType[] => {
   const sortedEpisodes: SeasonType[] = [];
+
   array.forEach((season) => {
     const sortList = [...season.episodes].sort((a, b) => {
           if(type === 'desc')
@@ -60,11 +51,13 @@ const sortBy = (array: SeasonType[], type: 'asc' | 'desc', func: (ep: EpisodeTyp
         });
     sortedEpisodes.push({ number: season.number, episodes: sortList });
   });
+
   return sortedEpisodes;
 }
 
 const sortEpisodes = (array: SeasonType[], type: SortItem): SeasonType[] => {
   let sortedEpisodes: SeasonType[] = [];
+
   switch (type.sortProperty) {
     case SortPropertyEnum.TITLE_DESC: {
       sortedEpisodes = sortBy(array, 'desc', ep => ep.name);
@@ -83,6 +76,7 @@ const sortEpisodes = (array: SeasonType[], type: SortItem): SeasonType[] => {
       break;
     }
   }
+
   return sortedEpisodes;
 };
 

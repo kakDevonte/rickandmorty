@@ -1,11 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { Character } from '../../components/Character';
+import { Character, NotFoundBlock } from '../../components';
 import { getCharacters } from '../../redux/character/asyncActions';
 import { getLocationById } from '../../redux/location/asyncActions';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import styles from './LocationPage.module.css';
-import { NotFoundBlock } from '../../components/NotFoundBlock';
 
 export const LocationPage: React.FC = () => {
   const { id } = useParams();

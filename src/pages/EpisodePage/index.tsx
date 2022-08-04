@@ -2,10 +2,9 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { getEpisodeById } from '../../redux/episodes/asyncActions';
-import { Character } from '../../components/Character';
+import { Character, NotFoundBlock } from '../../components';
 import { getCharacters } from '../../redux/character/asyncActions';
 import styles from './Episode.module.css';
-import { NotFoundBlock } from '../../components/NotFoundBlock';
 
 export const EpisodePage: React.FC = () => {
   const { id } = useParams();
