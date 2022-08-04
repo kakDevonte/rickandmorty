@@ -1,0 +1,11 @@
+.root {
+    padding: 10px;
+}
+
+.info {
+    margin-left: 15px;
+}
+.characters {
+    display: flex;
+    flex-wrap: wrap;
+}

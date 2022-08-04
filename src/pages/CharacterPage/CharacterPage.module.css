@@ -1,0 +1,70 @@
+.root {
+    overflow: hidden;
+    border-radius: 8px;
+    margin: 15px;
+
+    display: grid;
+    grid-gap: 10px;
+    grid-template-rows: 1fr 0.1fr auto auto;
+    grid-template-columns: 1fr 1fr;
+
+    grid-template-areas:
+            "image image"
+            "name name"
+            "episodes episodes"
+            "locations locations";
+
+    justify-items: center;
+}
+
+.image {
+    overflow: hidden;
+    border-radius: 8px;
+    grid-area: image;
+}
+
+.image img {
+    margin: 0;
+}
+
+.name {
+    grid-area: name;
+    text-align: center;
+}
+
+.name a {
+    text-decoration: none;
+}
+
+.name a p:hover {
+    color: rgb(255, 152, 0);
+}
+
+.episodes {
+    width: 80%;
+    grid-area: episodes;
+    text-align: center;
+}
+
+.episodes h2:hover {
+    color: rgb(255, 152, 0);
+    cursor: pointer;
+}
+
+
+.locations {
+    grid-area: locations;
+}
+
+.locations a {
+    text-decoration: none;
+}
+
+.locations h2:hover {
+    color: rgb(255, 152, 0);
+}
+
+.seasonList {
+    width: 90%;
+    list-style-type: none;
+}

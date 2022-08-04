@@ -1,11 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import episodes from './episodes/slise';
+import character from './character/slice';
+import location from './location/slice';
 
 export const store = configureStore({
-    reducer: {
-        episodes
-    },
+  reducer: {
+    episodes,
+    character,
+    location,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

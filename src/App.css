@@ -1,14 +1,33 @@
+* {
+    font-family: Roboto, sans-serif;
+    color: white;
+}
+
 .wrapper {
+    background-color: rgb(32, 35, 41);
     width: calc(100vw - 100px);
     height: 100%;
-    background-color: #fff;
     margin: 0 auto;
     border-radius: 10px;
     max-width: 1400px;
 }
 
-.title {
+.title{
+    padding-top: 15px;
     text-align: center;
+}
+
+.title span {
+    font-size: 48px;
+
+}
+
+.title a {
+    text-decoration: none;
+}
+
+.title span:hover {
+    cursor: pointer;
 }
 
 @media (max-width: 845px) {

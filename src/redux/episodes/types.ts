@@ -1,21 +1,44 @@
 type InfoType = {
-    page: number;
-    next: string | null;
-    prev: string | null;
-}
+  pages: number;
+  next: string | null;
+  prev: string | null;
+};
 
-type ResultType = {
-    id: number;
-    name: string;
-    air_date: string;
-    episode: string;
-}
+export type SeasonType = {
+  number: string;
+  episodes: EpisodeType[];
+};
+
+export type EpisodeType = {
+  id: number;
+  name: string;
+  air_date: string;
+  episode: string;
+  characters: string[];
+  created: string;
+};
 
 export type EpisodesType = {
-    info: InfoType;
-    results: ResultType[];
-}
+  info: InfoType;
+  results: EpisodeType[];
+};
 
 export type EpisodeState = {
-    data: EpisodesType;
+  info: InfoType;
+  results: SeasonType[];
+  searchValue: string;
+  sort: SortItem;
+  currEpisode: EpisodeType | null;
+};
+
+export type SortItem = {
+  name: string;
+  sortProperty: SortPropertyEnum;
+};
+
+export enum SortPropertyEnum {
+  TITLE_DESC = 'titleDesc',
+  TITLE_ASC = 'titleAsc',
+  DATE_DESC = 'dateDesc',
+  DATE_ASC = 'dateAsc',
 }
