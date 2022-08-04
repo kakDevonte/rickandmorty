@@ -13,13 +13,16 @@ import {
   searchEpisodes,
 } from './asyncActions';
 
+/**
+ * Функция для группировки эпизодов по сезонам.
+ * @param array массив эпизодов.
+ */
 const getSeasons = (array: EpisodeType[]): SeasonType[] => {
   const regex = /(?<=S).*?(?=E)/;
-  const firstSeason = String(regex.exec(array[0].episode));
+  const firstNumberSeason: string = String(regex.exec(array[0].episode));
   const seasons: SeasonType[] = [];
-
   let season: SeasonType = {
-    number: firstSeason,
+    number: firstNumberSeason,
     episodes: [],
   };
 
@@ -39,51 +42,44 @@ const getSeasons = (array: EpisodeType[]): SeasonType[] => {
   return seasons;
 };
 
-const sortEpisodes = (array: SeasonType[], type: SortItem): SeasonType[] => {
+/**
+ * Сортировка списка в указанном порядке с указанием параметра, по которому происходит сортировка.
+ * @param array входной массив для сортировки.
+ * @param type порядок сортировки.
+ * @param func колбек функция, возвращающая параметр, по которому происходит сортировка.
+ */
+const sortBy = (array: SeasonType[], type: 'asc' | 'desc', func: (ep: EpisodeType) => string): SeasonType[] => {
   const sortedEpisodes: SeasonType[] = [];
-  switch (type.sortProperty) {
-    case SortPropertyEnum.TITLE_DESC: {
-      array.forEach((season) => {
-        const sortList = [...season.episodes].sort((a, b) => {
-          if (b.name > a.name) return 1;
-          if (b.name < a.name) return -1;
+  array.forEach((season) => {
+    const sortList = [...season.episodes].sort((a, b) => {
+          if(type === 'desc')
+            return func(b) > func(a) ? 1 : -1;
+          if(type === 'asc')
+            return func(b) < func(a) ? 1 : -1;
           return 0;
         });
-        sortedEpisodes.push({ number: season.number, episodes: sortList });
-      });
+    sortedEpisodes.push({ number: season.number, episodes: sortList });
+  });
+  return sortedEpisodes;
+}
+
+const sortEpisodes = (array: SeasonType[], type: SortItem): SeasonType[] => {
+  let sortedEpisodes: SeasonType[] = [];
+  switch (type.sortProperty) {
+    case SortPropertyEnum.TITLE_DESC: {
+      sortedEpisodes = sortBy(array, 'desc', ep => ep.name);
       break;
     }
     case SortPropertyEnum.TITLE_ASC: {
-      array.forEach((season) => {
-        const sortList = [...season.episodes].sort((a, b) => {
-          if (b.name < a.name) return 1;
-          if (b.name > a.name) return -1;
-          return 0;
-        });
-        sortedEpisodes.push({ number: season.number, episodes: sortList });
-      });
+      sortedEpisodes = sortBy(array, 'asc', ep => ep.name);
       break;
     }
     case SortPropertyEnum.DATE_DESC: {
-      array.forEach((season) => {
-        const sortList = [...season.episodes].sort((a, b) => {
-          if (new Date(b.created) > new Date(a.created)) return 1;
-          if (new Date(b.created) < new Date(a.created)) return -1;
-          return 0;
-        });
-        sortedEpisodes.push({ number: season.number, episodes: sortList });
-      });
+      sortedEpisodes = sortBy(array, 'desc', ep => ep.created);
       break;
     }
     case SortPropertyEnum.DATE_ASC: {
-      array.forEach((season) => {
-        const sortList = [...season.episodes].sort((a, b) => {
-          if (new Date(b.created) < new Date(a.created)) return 1;
-          if (new Date(b.created) > new Date(a.created)) return -1;
-          return 0;
-        });
-        sortedEpisodes.push({ number: season.number, episodes: sortList });
-      });
+      sortedEpisodes = sortBy(array, 'asc', ep => ep.created);
       break;
     }
   }

@@ -24,7 +24,7 @@ export const Search: React.FC = () => {
         onChange={onChangeSearchValue}
       />
       <button className={styles.button} onClick={onClickSearchBtn}>
-        Найти
+          Search
       </button>
     </div>
   );

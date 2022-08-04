@@ -53,14 +53,14 @@ export const EpisodesPage: React.FC = () => {
             disabled={!info.prev}
             onClick={() => setPage(page - 1)}
           >
-            Назад
+            Back
           </button>
           <button
             className={styles.button}
             disabled={!info.next}
             onClick={() => setPage(page + 1)}
           >
-            Вперед
+            Next
           </button>
         </div>
       )}
