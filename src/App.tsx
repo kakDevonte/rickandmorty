@@ -1,6 +1,5 @@
 import React from 'react';
-import {NavLink, Route, Routes } from 'react-router-dom';
-
+import { NavLink, Route, Routes } from 'react-router-dom';
 import { EpisodesPage } from './pages/EpisodesPage';
 import { EpisodePage } from './pages/EpisodePage';
 import { CharacterPage } from './pages/CharacterPage';
@@ -10,10 +9,11 @@ import './App.css';
 export const App: React.FC = () => {
   return (
     <div className="wrapper">
-        <div className="title">
-            <NavLink to={'/'}><span>Rick and Morty</span></NavLink>
-
-        </div>
+      <div className="title">
+        <NavLink to={'/'}>
+          <span>Rick and Morty</span>
+        </NavLink>
+      </div>
       <Routes>
         <Route path="/" element={<EpisodesPage />} />
         <Route path="/episode/:id" element={<EpisodePage />} />

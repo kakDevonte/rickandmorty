@@ -41,6 +41,7 @@
 }
 
 .episodes {
+    width: 80%;
     grid-area: episodes;
     text-align: center;
 }

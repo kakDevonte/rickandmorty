@@ -10,7 +10,9 @@ export const Character: React.FC<CharacterType> = (props) => {
         <img src={props.image} />
       </div>
       <div className={styles.name}>
-          <NavLink to={`/character/${props.id}`}><h3>{props.name}</h3></NavLink>
+        <NavLink to={`/character/${props.id}`}>
+          <h3>{props.name}</h3>
+        </NavLink>
       </div>
     </div>
   );

@@ -1,26 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getLocationById } from './asyncActions';
-import {LocationState, LocationType } from './types';
+import { LocationState } from './types';
 
 const initialState: LocationState = {
-    location: {
-        id: 1,
-        name: '',
-        type: '',
-        dimension: '',
-        residents: [],
-    }
+  location: null,
 };
 
 const locationSlice = createSlice({
-    name: 'location',
-    initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase(getLocationById.fulfilled, (state, action) => {
-            state.location = action.payload;
-        })
-    },
+  name: 'location',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getLocationById.fulfilled, (state, action) => {
+      state.location = action.payload;
+    });
+    builder.addCase(getLocationById.rejected, (state) => {
+      state.location = null;
+    });
+  },
 });
 
 export default locationSlice.reducer;

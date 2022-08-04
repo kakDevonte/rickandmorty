@@ -28,9 +28,8 @@ export type EpisodeState = {
   results: SeasonType[];
   searchValue: string;
   sort: SortItem;
-  currEpisode: EpisodeType;
+  currEpisode: EpisodeType | null;
 };
-
 
 export type SortItem = {
   name: string;
