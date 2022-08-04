@@ -15,8 +15,14 @@ const characterSlice = createSlice({
     builder.addCase(getCharacterById.fulfilled, (state, action) => {
       state.currCharacter = action.payload;
     });
+    builder.addCase(getCharacterById.rejected, (state) => {
+      state.currCharacter = null;
+    });
     builder.addCase(getCharacters.fulfilled, (state, action) => {
       state.characters = action.payload;
+    });
+    builder.addCase(getCharacters.rejected, (state) => {
+      state.characters = [];
     });
   },
 });

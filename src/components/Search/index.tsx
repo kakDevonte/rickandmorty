@@ -5,21 +5,27 @@ import { useAppDispatch, useAppSelector } from '../../redux/store';
 import styles from './Search.module.css';
 
 export const Search: React.FC = () => {
-    const { searchValue } = useAppSelector(state => state.episodes);
-    const dispatch = useAppDispatch();
+  const { searchValue } = useAppSelector((state) => state.episodes);
+  const dispatch = useAppDispatch();
 
-    const onChangeSearchValue = (event: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setSearchValue(event.target.value));
-    };
+  const onChangeSearchValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setSearchValue(event.target.value));
+  };
 
-    const onClickSearchBtn = () => {
-        dispatch(searchEpisodes({ page: 1, value: searchValue }));
-    };
+  const onClickSearchBtn = () => {
+    dispatch(searchEpisodes({ page: 1, value: searchValue }));
+  };
 
-    return(
-        <div>
-        <input className={styles.input} value={searchValue} onChange={onChangeSearchValue}/>
-        <button className={styles.button} onClick={onClickSearchBtn}>Найти</button>
+  return (
+    <div>
+      <input
+        className={styles.input}
+        value={searchValue}
+        onChange={onChangeSearchValue}
+      />
+      <button className={styles.button} onClick={onClickSearchBtn}>
+        Найти
+      </button>
     </div>
-    );
+  );
 };

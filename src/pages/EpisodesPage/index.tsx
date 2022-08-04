@@ -5,17 +5,19 @@ import { getEpisodes, searchEpisodes } from '../../redux/episodes/asyncActions';
 import { Episode } from '../../components/Episode';
 import { Search } from '../../components/Search';
 import { SortPopup } from '../../components/SortPopup';
+import { NotFoundBlock } from '../../components/NotFoundBlock';
 
 export const EpisodesPage: React.FC = () => {
-  const { results, info, searchValue } = useAppSelector((state) => state.episodes);
+  const { results, info, searchValue } = useAppSelector(
+    (state) => state.episodes
+  );
   const [page, setPage] = React.useState(1);
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    if(searchValue) {
+    if (searchValue) {
       dispatch(searchEpisodes({ page, value: searchValue }));
-    }
-    else {
+    } else {
       dispatch(getEpisodes(page));
     }
   }, [page]);
@@ -30,7 +32,7 @@ export const EpisodesPage: React.FC = () => {
         <Search />
         <SortPopup />
       </div>
-      {results &&
+      {results.length ? (
         results.map((season) => (
           <div className={styles.root} key={season.number}>
             <h2>Season {season.number}</h2>
@@ -40,23 +42,28 @@ export const EpisodesPage: React.FC = () => {
               ))}
             </ul>
           </div>
-        ))}
-      {info.pages > 1 && <div className={styles.pagination}>
-        <button
+        ))
+      ) : (
+        <NotFoundBlock />
+      )}
+      {info.pages > 1 && (
+        <div className={styles.pagination}>
+          <button
             className={styles.button}
             disabled={!info.prev}
             onClick={() => setPage(page - 1)}
-        >
-          Назад
-        </button>
-        <button
+          >
+            Назад
+          </button>
+          <button
             className={styles.button}
             disabled={!info.next}
             onClick={() => setPage(page + 1)}
-        >
-          Вперед
-        </button>
-      </div>}
+          >
+            Вперед
+          </button>
+        </div>
+      )}
     </div>
   );
 };

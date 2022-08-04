@@ -1,6 +1,17 @@
 import { createSlice, PayloadAction, current } from '@reduxjs/toolkit';
-import { EpisodeState, EpisodesType, EpisodeType, SeasonType, SortItem, SortPropertyEnum } from './types';
-import { getEpisodeById, getEpisodes, getEpisodesByArray, searchEpisodes } from './asyncActions';
+import {
+  EpisodeState,
+  EpisodeType,
+  SeasonType,
+  SortItem,
+  SortPropertyEnum,
+} from './types';
+import {
+  getEpisodeById,
+  getEpisodes,
+  getEpisodesByArray,
+  searchEpisodes,
+} from './asyncActions';
 
 const getSeasons = (array: EpisodeType[]): SeasonType[] => {
   const regex = /(?<=S).*?(?=E)/;
@@ -32,54 +43,46 @@ const sortEpisodes = (array: SeasonType[], type: SortItem): SeasonType[] => {
   const sortedEpisodes: SeasonType[] = [];
   switch (type.sortProperty) {
     case SortPropertyEnum.TITLE_DESC: {
-      array.forEach(season => {
+      array.forEach((season) => {
         const sortList = [...season.episodes].sort((a, b) => {
-          if(b.name > a.name)
-            return 1;
-          if(b.name < a.name)
-            return -1;
+          if (b.name > a.name) return 1;
+          if (b.name < a.name) return -1;
           return 0;
         });
-        sortedEpisodes.push({ number: season.number, episodes: sortList})
+        sortedEpisodes.push({ number: season.number, episodes: sortList });
       });
       break;
     }
     case SortPropertyEnum.TITLE_ASC: {
-      array.forEach(season => {
+      array.forEach((season) => {
         const sortList = [...season.episodes].sort((a, b) => {
-          if(b.name < a.name)
-            return 1;
-          if(b.name > a.name)
-            return -1;
+          if (b.name < a.name) return 1;
+          if (b.name > a.name) return -1;
           return 0;
         });
-        sortedEpisodes.push({ number: season.number, episodes: sortList})
+        sortedEpisodes.push({ number: season.number, episodes: sortList });
       });
       break;
     }
     case SortPropertyEnum.DATE_DESC: {
-      array.forEach(season => {
+      array.forEach((season) => {
         const sortList = [...season.episodes].sort((a, b) => {
-          if(new Date(b.created) > new Date(a.created))
-            return 1;
-          if(new Date(b.created) < new Date(a.created))
-            return -1;
+          if (new Date(b.created) > new Date(a.created)) return 1;
+          if (new Date(b.created) < new Date(a.created)) return -1;
           return 0;
         });
-        sortedEpisodes.push({ number: season.number, episodes: sortList})
+        sortedEpisodes.push({ number: season.number, episodes: sortList });
       });
       break;
     }
     case SortPropertyEnum.DATE_ASC: {
-      array.forEach(season => {
+      array.forEach((season) => {
         const sortList = [...season.episodes].sort((a, b) => {
-          if(new Date(b.created) < new Date(a.created))
-            return 1;
-          if(new Date(b.created) > new Date(a.created))
-            return -1;
+          if (new Date(b.created) < new Date(a.created)) return 1;
+          if (new Date(b.created) > new Date(a.created)) return -1;
           return 0;
         });
-        sortedEpisodes.push({ number: season.number, episodes: sortList})
+        sortedEpisodes.push({ number: season.number, episodes: sortList });
       });
       break;
     }
@@ -92,14 +95,7 @@ const initialState: EpisodeState = {
   results: [],
   searchValue: '',
   sort: { name: 'date(ASC)', sortProperty: SortPropertyEnum.DATE_ASC },
-  currEpisode: {
-    id: 1,
-    name: '',
-    air_date: '',
-    episode: '',
-    characters: [],
-    created: '',
-  },
+  currEpisode: null,
 };
 
 const episodesSlice = createSlice({
@@ -112,7 +108,7 @@ const episodesSlice = createSlice({
     setSort(state, action: PayloadAction<SortItem>) {
       state.sort = action.payload;
       state.results = sortEpisodes(current(state.results), state.sort);
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getEpisodes.fulfilled, (state, action) => {
@@ -123,6 +119,9 @@ const episodesSlice = createSlice({
     builder.addCase(getEpisodeById.fulfilled, (state, action) => {
       state.currEpisode = action.payload;
     });
+    builder.addCase(getEpisodeById.rejected, (state) => {
+      state.currEpisode = null;
+    });
     builder.addCase(getEpisodesByArray.fulfilled, (state, action) => {
       const seasons = getSeasons(action.payload);
       state.results = sortEpisodes(seasons, state.sort);
@@ -131,6 +130,10 @@ const episodesSlice = createSlice({
       state.info = action.payload.info;
       const seasons = getSeasons(action.payload.results);
       state.results = sortEpisodes(seasons, state.sort);
+    });
+    builder.addCase(searchEpisodes.rejected, (state) => {
+      state.info = initialState.info;
+      state.results = [];
     });
   },
 });
