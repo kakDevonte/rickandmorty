@@ -1,5 +1,5 @@
 type InfoType = {
-  page: number;
+  pages: number;
   next: string | null;
   prev: string | null;
 };
@@ -25,5 +25,6 @@ export type EpisodesType = {
 export type EpisodeState = {
   info: InfoType;
   results: SeasonType[];
+  searchValue: string;
   currEpisode: EpisodeType;
 };

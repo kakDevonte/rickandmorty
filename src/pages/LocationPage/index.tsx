@@ -10,12 +10,18 @@ export const LocationPage: React.FC = () => {
     const { id } = useParams();
     const dispatch = useAppDispatch();
     const { characters } = useAppSelector(state => state.character);
-    const { location } = useAppSelector(state => state.location)
+    const { location } = useAppSelector(state => state.location);
 
     React.useEffect(() => {
         dispatch(getLocationById(Number(id)));
     }, []);
 
+    /*
+    asdasd
+    asdads
+    asdasd
+    asdasd
+    */
     React.useEffect(() => {
         const listCharacterIds: string[] = [];
 
@@ -30,9 +36,11 @@ export const LocationPage: React.FC = () => {
 
     return (
         <div className={styles.root}>
-            <h1>Name - {location.name}</h1>
-            <h2>Type - {location.type}</h2>
-            <h2>Dimension - {location.dimension}</h2>
+            <div className={styles.info}>
+                <h1>Name - {location.name}</h1>
+                <h2>Type - {location.type}</h2>
+                <h2>Dimension - {location.dimension}</h2>
+            </div>
             <div className={styles.characters}>
                 {characters &&
                 characters.map((item) => <Character key={item.id} {...item} />)}

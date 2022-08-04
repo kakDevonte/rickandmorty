@@ -12,8 +12,22 @@
     max-width: 1400px;
 }
 
-.title {
+.title{
+    padding-top: 15px;
     text-align: center;
+}
+
+.title span {
+    font-size: 48px;
+
+}
+
+.title a {
+    text-decoration: none;
+}
+
+.title span:hover {
+    cursor: pointer;
 }
 
 @media (max-width: 845px) {

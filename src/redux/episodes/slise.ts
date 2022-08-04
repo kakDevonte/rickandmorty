@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { EpisodeState, EpisodesType, EpisodeType, SeasonType } from './types';
-import { getEpisodeById, getEpisodes, getEpisodesByArray } from './asyncActions';
+import { getEpisodeById, getEpisodes, getEpisodesByArray, searchEpisodes } from './asyncActions';
 
 
 const getSeasons = (array: EpisodeType[]): SeasonType[] => {
@@ -30,8 +30,9 @@ const getSeasons = (array: EpisodeType[]): SeasonType[] => {
 }
 
 const initialState: EpisodeState = {
-  info: { page: 1, next: null, prev: null },
+  info: { pages: 1, next: null, prev: null },
   results: [],
+  searchValue: '',
   currEpisode: {
     id: 1,
     name: '',
@@ -44,11 +45,14 @@ const initialState: EpisodeState = {
 const episodesSlice = createSlice({
   name: 'episodes',
   initialState,
-  reducers: {},
+  reducers: {
+    setSearchValue(state, action) {
+      state.searchValue = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getEpisodes.fulfilled, (state, action) => {
       state.info = action.payload.info;
-
       state.results = getSeasons(action.payload.results);
     });
     builder.addCase(getEpisodeById.fulfilled, (state, action) => {
@@ -58,8 +62,12 @@ const episodesSlice = createSlice({
     builder.addCase(getEpisodesByArray.fulfilled, (state, action) => {
       state.results = getSeasons(action.payload);
     });
+    builder.addCase(searchEpisodes.fulfilled, (state, action) => {
+      state.info = action.payload.info;
+      state.results = getSeasons(action.payload.results);
+    });
   },
 });
 
-//export const {  } = episodesSlice.actions;
+export const { setSearchValue } = episodesSlice.actions;
 export default episodesSlice.reducer;

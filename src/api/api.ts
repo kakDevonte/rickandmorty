@@ -14,6 +14,9 @@ export const mortyAPI = {
   getEpisodeById(id: number) {
     return instance.get(`episode/${id}`);
   },
+  searchEpisodes(page: number, value: string) {
+    return instance.get(`episode/?page=${page}&name=${value}`);
+  },
   getCharacterById(id: number) {
     return instance.get(`character/${id}`);
   },
