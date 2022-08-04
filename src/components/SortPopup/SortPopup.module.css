@@ -1,0 +1,36 @@
+.sortLabel {
+    color: #f8b002;
+    cursor: pointer;
+}
+
+.sortPopup {
+    text-align: center;
+    width: 150px;
+    position: absolute;
+    background-color: rgb(60, 62, 68);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.sortPopup ul {
+    padding-inline-start: 0;
+    list-style-type: none;
+}
+
+.sortPopup ul li {
+    font-size: 16px;
+    padding: 12px 20px;
+    cursor: pointer;
+}
+
+.sortPopup ul li:active {
+    background: rgb(158, 158, 158);
+}
+
+.sortPopup ul li:hover {
+    background: rgb(158, 158, 158);
+}
+
+.active {
+    font-weight: bold;
+    color: #f8b002;
+}

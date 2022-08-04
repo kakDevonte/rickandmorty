@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { getEpisodes, searchEpisodes } from '../../redux/episodes/asyncActions';
 import { Episode } from '../../components/Episode';
 import { Search } from '../../components/Search';
+import { SortPopup } from '../../components/SortPopup';
 
 export const EpisodesPage: React.FC = () => {
   const { results, info, searchValue } = useAppSelector((state) => state.episodes);
@@ -19,10 +20,15 @@ export const EpisodesPage: React.FC = () => {
     }
   }, [page]);
 
+  React.useEffect(() => {
+    setPage(1);
+  }, [searchValue]);
+
   return (
     <div>
       <div className={styles.search}>
         <Search />
+        <SortPopup />
       </div>
       {results &&
         results.map((season) => (
